@@ -13,8 +13,9 @@ This is the improved version of this booster: https://github.com/DaniEnsi/discor
 - 50 Stars - Release Version 3
 
 # How to use
-1. Run setup.bat
-2. Run main.py
+1. Run ```setup.bat```
+2. Paste your tokens into ```tokens.txt```
+3. Run ```BitBoost.py```
 
 If you have any issues create one or DM me on discord
 
