@@ -9,7 +9,7 @@ Tool that joins nitro tokens to servers and boosts them automatically...
 - Improved UI
 
 # Achievements
-- 20 Stars - Add hCaptcha support ( In Progress)
+- 20 Stars - Add hCaptcha support (🔧 In Progress)
 - 50 Stars - Release Version 3
 
 # How to use
