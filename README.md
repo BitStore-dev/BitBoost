@@ -5,7 +5,6 @@ Tool that boosts servers automatically with nitro tokens...
 
 ## Improvements
 - Improved general speed of token switching
-- Added automatic server joining (No Captcha support yet)
 - Improved UI
 
 # Achievements
