@@ -1,5 +1,5 @@
 # BitBoost - Sever Booster
-Tool that joins nitro tokens to servers and boosts them automatically...
+Tool that boosts servers automatically with nitro tokens...
 
 **Version 1: https://github.com/DaniEnsi/discord-server-boost-tool**
 
@@ -9,7 +9,7 @@ Tool that joins nitro tokens to servers and boosts them automatically...
 - Improved UI
 
 # Achievements
-- 20 Stars - Add hCaptcha support (In Progress 🔧)
+- 20 Stars - Add hCaptcha support (✅)
 - 50 Stars - Release Version 3
 
 # How to use
