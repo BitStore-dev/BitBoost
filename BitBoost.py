@@ -4,95 +4,132 @@ GNU License
 Copyright (c) 2022 DaniDuese
 
 """
-import aiohttp
-import asyncio
-import os
-os.system("pip install tasksio")
-import sys
-from colorama import Fore
-import tasksio
-import requests
-from typing import Optional
 from ab5 import hgratient
+from typing import Optional
+import colorama
+import sys
+from pystyle import Center, Colorate, Colors, Write
+import tls_client
+import os
 
-def setTitle(title: Optional[any]=None):
+
+def setTitle(title: Optional[any] = None):
   os.system("title "+title)
 
+
 setTitle("BitBoost | Server Booster")
+
 
 def clear():
   if sys.platform in ["linux", "linux2", "darwin"]:
     os.system("clear")
   else:
     os.system("cls")
+
 clear()
 
-async def join_server(token, inv):
-  headers = {"Authorization": token, "accept": "*/*", "accept-language": "en-US", "connection": "keep-alive", "cookie": f'__cfduid={os.urandom(43).hex()}; __dcfduid={os.urandom(32).hex()}; locale=en-US', "DNT": "1", "origin": "https://discord.com", "sec-fetch-dest": "empty", "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin", "referer": "https://discord.com/channels/@me", "TE": "Trailers", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9001 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36", "X-Super-Properties": "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjEuMC45MDAxIiwib3NfdmVyc2lvbiI6IjEwLjAuMTkwNDIiLCJvc19hcmNoIjoieDY0Iiwic3lzdGVtX2xvY2FsZSI6ImVuLVVTIiwiY2xpZW50X2J1aWxkX251bWJlciI6ODMwNDAsImNsaWVudF9ldmVudF9zb3VyY2UiOm51bGx9"}
-  async with aiohttp.ClientSession(headers=headers) as serverjoinersession:
-    async with serverjoinersession.post(f"https://discord.com/api/v9/invites/{inv}") as response:
-      master = headers + "https://discord.com/api/v9/users/@me" 
-      if response.status in (204, 200, 201):
-        print(f" Successfully Joined Server")
-      else:
-        print(f" Failed To Join Server, Status Code: {response.status}")
-        print(" Please try again")
-
-async def boost_server(guildid, token):
-  headers = {"Authorization": token, "accept": "*/*", "accept-language": "en-US", "connection": "keep-alive", "cookie": f'__cfduid={os.urandom(43).hex()}; __dcfduid={os.urandom(32).hex()}; locale=en-US', "DNT": "1", "origin": "https://discord.com", "sec-fetch-dest": "empty", "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin", "referer": "https://discord.com/channels/@me", "TE": "Trailers", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9001 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36", "X-Super-Properties": "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjEuMC45MDAxIiwib3NfdmVyc2lvbiI6IjEwLjAuMTkwNDIiLCJvc19hcmNoIjoieDY0Iiwic3lzdGVtX2xvY2FsZSI6ImVuLVVTIiwiY2xpZW50X2J1aWxkX251bWJlciI6ODMwNDAsImNsaWVudF9ldmVudF9zb3VyY2UiOm51bGx9"}
-  async with aiohttp.ClientSession(headers=headers) as ClientSession:
-    async with ClientSession.get(f"https://discord.com/api/v9/users/@me/guilds/premium/subscription-slots") as nvmmm:
-      if nvmmm.status == 200:
-        idk_var = await nvmmm.json()
-        for varr in idk_var:
-          id__ = varr['id']
-          payload = {"user_premium_guild_subscription_slot_ids": [id__]}
-          master = 0 + "v9/guilds"
-          async with ClientSession.put(f"https://discord.com/api/v9/guilds/{guildid}/premium/subscriptions", json=payload) as boost_req:
-            btxt = await boost_req.text()
-            if "id" in btxt:
-              print(f" Successfully Boosted Server")
-            else:
-              print(" Failed To Boost Server, Unknown Error Occurred")
-
-
-banner = f"""\n{Fore.BLUE}[1]{Fore.RESET} Server Joiner\n\n{Fore.BLUE}[2]{Fore.RESET} Boost Server\n"""
-
-
-async def start_join(inv):
-  async with tasksio.TaskPool(10_000) as pool:
-    for token in open('tokens.txt', 'r').readlines():
-      tk = token.strip()
-      await pool.put(join_server(tk, inv))
-
-async def start_boost(id):
-  async with tasksio.TaskPool(10_000) as pool:
-    for token in open('tokens.txt', 'r').readlines():
-      tk = token.strip()
-      await pool.put(boost_server(id, tk))
-
+sub_ids = []
 logo = ("""__________.__  __ __________                       __   
 \______   \__|/  |\______   \ ____   ____  _______/  |_ 
  |    |  _/  \   __\    |  _//  _ \ /  _ \/  ___/\   __\ 
  |    |   \  ||  | |    |   (  <_> |  <_> )___ \  |  |  
  |______  /__||__| |______  /\____/ \____/____  > |__|  
         \/                \/                  \/        """)
+banner = ("""Please make sure that all your tokens are already in the server you want to boost.\n""")
 
-print(hgratient(logo,[0,223,50],[0,25,222]))
+print(hgratient(logo, [0, 223, 50], [0, 25, 222]))
 print(banner)
-ch = input("Choice: ")
-try:
-  c = int(ch)
-except ValueError:
-  print(" Use Number To Choose.")
-  sys.exit()
-  
-if c == 1:
-  invv = input(" Enter Invite Code: discord.gg/")
-  asyncio.run(start_join(invv))
-elif c == 2:
-  g = int(input("| Enter Guild ID: "))
-  asyncio.run(start_boost(g))
-else:
-  print(" Invaild Option")
-  exit(0)
+__guild_id__ = Write.Input("Guild ID: ", Colors.blue_to_green, interval=0.05)
+colorama.init(convert=True)
+
+
+class Nitro:
+    def __init__(self, token: str):
+        self.token = token
+        self.headers = {
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            "accept-language": "en-US",
+            "authorization": token,
+            "referer": "https://discord.com/channels/@me",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36",
+            "x-debug-options": "bugReporterEnabled",
+            "x-discord-locale": "en-US",
+            "x-super-properties": "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjEuMC45MDA3Iiwib3NfdmVyc2lvbiI6IjEwLjAuMTkwNDMiLCJvc19hcmNoIjoieDY0Iiwic3lzdGVtX2xvY2FsZSI6ImVuLVVTIiwiY2xpZW50X2J1aWxkX251bWJlciI6MTYxODQyLCJjbGllbnRfZXZlbnRfc291cmNlIjpudWxsfQ=="
+        }
+        self.session = tls_client.Session(client_identifier="chrome_107")
+        self.sub_ids = []
+
+    def removeTokenFromTxt(self):
+        with open("tokens.txt", "r") as f:
+            lines = f.readlines()
+        with open("tokens.txt", "w") as f:
+            for line in lines:
+                if line.strip("\n") != self.token:
+                    f.write(line)
+
+    def hasNitro(self):
+        sex = self.session.get(
+            "https://discord.com/api/v9/users/@me/guilds/premium/subscription-slots",
+            headers=self.headers,
+        )
+        if sex.status_code in [403, 401]:
+            return self._extracted_from_hasNitro_7('Token is invalid, removing.')
+        try:
+            for sub in sex.json():
+                self.sub_ids.append(sub["id"])
+        except Exception as e:
+            print(e)
+            print(sex.text)
+        if len(self.sub_ids) == 0:
+            return self._extracted_from_hasNitro_7('Token has no nitro, removing.')
+        log(f"{colorama.Fore.GREEN}Token has nitro.")
+        return True
+
+    # TODO Rename this here and in `hasNitro`
+    def _extracted_from_hasNitro_7(self, arg0):
+        log(f"{colorama.Fore.RED}{arg0}")
+        self.removeTokenFromTxt()
+        return False
+
+    def boostServer(self, guildID):
+        for i in range(len(self.sub_ids)):
+            self.headers["Content-Type"] = "application/json"
+            r = self.session.put(
+                url=f"https://discord.com/api/v9/guilds/{guildID}/premium/subscriptions",
+                headers=self.headers,
+                json={
+                    "user_premium_guild_subscription_slot_ids": [f"{self.sub_ids[i]}"]
+                },
+            )
+            if r.status_code == 201:
+                log(
+                    f"{colorama.Fore.GREEN}Boosted {i + 1} of {len(sub_ids)} from {self.token[25:]}"
+                )
+            elif r.status_code == 400:
+                log(
+                    f"{colorama.Fore.YELLOW}Boost already used {i + 1} of {len(sub_ids)} from {self.token[25:]}"
+                )
+            else:
+                log(f"{colorama.Fore.RED}ERROR: {r.status_code}")
+
+
+def log(text):
+    print(f"{text}{colorama.Fore.RESET}")
+
+
+def main():
+    with open("tokens.txt", "r") as f:
+        tokens = f.read().splitlines()
+    for token in tokens:
+        nitro = Nitro(token)
+        if nitro.hasNitro():
+            nitro.boostServer(__guild_id__)
+
+
+if __name__ == "__main__":
+    main()
+    input("Press enter to exit.")
