@@ -17,7 +17,7 @@ def setTitle(title: Optional[any] = None):
   os.system("title "+title)
 
 
-setTitle("BitBoost | Server Booster")
+setTitle("BitBoost V2 | Server Booster")
 
 
 def clear():
