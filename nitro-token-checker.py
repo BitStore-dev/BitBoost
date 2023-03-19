@@ -17,7 +17,7 @@ def setTitle(title: Optional[any] = None):
   os.system("title "+title)
 
 
-setTitle("BitBoost V2 | Server Booster")
+setTitle("BitBoost | Server Booster")
 
 
 def clear():
@@ -29,18 +29,6 @@ def clear():
 clear()
 
 sub_ids = []
-logo = ("""__________.__  __ __________                       __   
-\______   \__|/  |\______   \ ____   ____  _______/  |_ 
- |    |  _/  \   __\    |  _//  _ \ /  _ \/  ___/\   __\ 
- |    |   \  ||  | |    |   (  <_> |  <_> )___ \  |  |  
- |______  /__||__| |______  /\____/ \____/____  > |__|  
-        \/                \/                  \/        """)
-banner = ("""Please make sure that all your tokens are already in the server you want to boost.\n""")
-
-print(hgratient(logo, [0, 223, 50], [0, 25, 222]))
-print(banner)
-__guild_id__ = Write.Input("Guild ID: ", Colors.blue_to_green, interval=0.05)
-colorama.init(convert=True)
 
 
 class Nitro:
@@ -95,26 +83,6 @@ class Nitro:
         self.removeTokenFromTxt()
         return False
 
-    def boostServer(self, guildID):
-        for i in range(len(self.sub_ids)):
-            self.headers["Content-Type"] = "application/json"
-            r = self.session.put(
-                url=f"https://discord.com/api/v9/guilds/{guildID}/premium/subscriptions",
-                headers=self.headers,
-                json={
-                    "user_premium_guild_subscription_slot_ids": [f"{self.sub_ids[i]}"]
-                },
-            )
-            if r.status_code == 201:
-                log(
-                    f"{colorama.Fore.GREEN}Boosted {i + 1} of {len(sub_ids)} from {self.token[25:]}"
-                )
-            elif r.status_code == 400:
-                log(
-                    f"{colorama.Fore.YELLOW}Boost already used {i + 1} of {len(sub_ids)} from {self.token[25:]}"
-                )
-            else:
-                log(f"{colorama.Fore.RED}ERROR: {r.status_code}")
 
 
 def log(text):
@@ -127,9 +95,9 @@ def main():
     for token in tokens:
         nitro = Nitro(token)
         if nitro.hasNitro():
-            nitro.boostServer(__guild_id__)
+            pass
 
 
 if __name__ == "__main__":
     main()
-    input("Press enter to exit.")
+    pass
