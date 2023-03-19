@@ -1,26 +1,13 @@
-# BitBoost - Sever Booster
-Tool that boosts servers automatically with nitro tokens...
-
-**Version 1: https://github.com/DaniEnsi/discord-server-boost-tool**
-
-## Improvements
-- Improved general speed of token switching
-- Improved UI
-
-# Achievements
-- 20 Stars - Add hCaptcha support (✅)
-- 50 Stars - Release Version 3
+# Discord Nitro Token Checker, forked from BitBoost
+Tool that sorts discord tokens to see if they have nitro or not...
 
 # How to use
 1. Run ```setup.bat```
 2. Paste your tokens into ```tokens.txt```
-3. Run ```BitBoost.py```
+3. Run ```nitro-token-checker.py```
 
-If you have any issues create one or DM me on discord
-
-## Information 
-
-![image](https://user-images.githubusercontent.com/74594229/184509377-b16c89e1-ae09-45f9-b034-8048b4229500.png)
-
+If you have any issues create one or DM me on discord: thk6634#1432
 
 Educational purposes only
+
+Sorry for bad english.
